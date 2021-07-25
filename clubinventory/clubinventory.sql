@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 24, 2021 at 12:46 PM
+-- Host: localhost
+-- Generation Time: Jul 25, 2021 at 11:57 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `ID` varchar(10) NOT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `reference_name` varchar(225) DEFAULT NULL,
+  `ID` int(255) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `reference_name` varchar(225) NOT NULL,
   `mobile_no` varchar(15) DEFAULT NULL,
   `emailid` varchar(225) DEFAULT NULL,
   `club` varchar(10) DEFAULT NULL
@@ -41,10 +41,10 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`ID`, `password`, `reference_name`, `mobile_no`, `emailid`, `club`) VALUES
-('', '1234', 'bee', '5678', 'a@b', 'none'),
-('c1000', 'pa55word', 'Photography and Moviemaking Club Admin', '+917645399599', 'pmcadmin@iitmandi.ac.in', 'PMC'),
-('c1001', 'pa55word2', 'Designauts, Design Club', '+917042370732', 'designauts@iitmandi.ac.in', 'Designauts'),
-('c1002', 'pa55word3', 'Music Society', '+917742383616', 'musicsociety@iitmandi.ac.in', 'Music Club');
+(1, '1234', 'bee', '5678', 'a@b', 'none'),
+(2, 'pa55word', 'Photography and Moviemaking Club Admin', '+917645399599', 'pmcadmin@iitmandi.ac.in', 'PMC'),
+(3, 'pa55word2', 'Designauts, Design Club', '+917042370732', 'designauts@iitmandi.ac.in', 'Designauts'),
+(4, 'pa55word3', 'Music Society', '+917742383616', 'musicsociety@iitmandi.ac.in', 'Music Club');
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ INSERT INTO `admin` (`ID`, `password`, `reference_name`, `mobile_no`, `emailid`,
 --
 
 CREATE TABLE `club_equipment` (
-  `ID` int(10) NOT NULL,
+  `ID` int(255) NOT NULL,
   `equipment_name` varchar(255) DEFAULT NULL,
   `specification` varchar(255) DEFAULT NULL,
   `image_path` varchar(1024) DEFAULT NULL
@@ -64,11 +64,12 @@ CREATE TABLE `club_equipment` (
 --
 
 INSERT INTO `club_equipment` (`ID`, `equipment_name`, `specification`, `image_path`) VALUES
-(1, 'Tripod', 'E-Image EI-7010A 5.5ft Tripod Stand Kit with Hydraulic Fluid Head', 'https://images-na.ssl-images-amazon.com/images/I/61ZWViktS7L._SL1500_.jpg'),
-(2, 'DSLR', 'Nikon D5600', 'https://images-na.ssl-images-amazon.com/images/I/41bmrRyXWmL.jpg'),
+(1, 'Zooom Lens', 'Sony SELP18105G E Mount APS-C 18-105 mm F4.0 Zoom G Lens', 'https://images-na.ssl-images-amazon.com/images/I/618sVwjGxZL._SL1200_.jpg'),
+(2, 'tri', 'E-Image EI-7010A 5.5ft Tripod Stand Kit with Hydraulic Fluid Head', 'https://images-na.ssl-images-amazon.com/images/I/61ZWViktS7L._SL1500_.jpg'),
 (3, 'Mirrorless Camera', 'Sony Alpha ILCE-7C Compact Full Frame Camera (4K, Flip Screen, Light Weight, Real time Tracking, Content Creation)', 'https://images-na.ssl-images-amazon.com/images/I/81AcTLXirzL._SL1500_.jpg'),
-(4, 'Zooom Lens', 'Sony SELP18105G E Mount APS-C 18-105 mm F4.0 Zoom G Lens', 'https://images-na.ssl-images-amazon.com/images/I/618sVwjGxZL._SL1200_.jpg'),
-(5, 'Electric Guitar', 'Juârez ST38 Electric Guitar Kit/Set, Right Handed, Red Sunburst RDS, With Case/Bag & Picks', 'https://images-na.ssl-images-amazon.com/images/I/710CTI9jGhL._SL1500_.jpg');
+(4, 'Electric Guitar', 'Juârez ST38 Electric Guitar Kit/Set, Right Handed, Red Sunburst RDS, With Case/Bag & Picks', 'https://images-na.ssl-images-amazon.com/images/I/710CTI9jGhL._SL1500_.jpg'),
+(5, 'DSLR', 'Nikon D5600', 'https://images-na.ssl-images-amazon.com/images/I/41bmrRyXWmL.jpg'),
+(6, 'Drumstick', 'thin, light, sturdy, 12 inch long', 'https://images-na.ssl-images-amazon.com/images/I/51wrKa7o4LL._SX466_.jpg');
 
 -- --------------------------------------------------------
 
@@ -77,12 +78,12 @@ INSERT INTO `club_equipment` (`ID`, `equipment_name`, `specification`, `image_pa
 --
 
 CREATE TABLE `issues` (
-  `issueID` int(11) NOT NULL,
-  `equipmentID` varchar(10) DEFAULT NULL,
-  `issuerID` varchar(10) DEFAULT NULL,
-  `date_of_issue` date DEFAULT NULL,
-  `issue_period` int(11) DEFAULT NULL,
-  `returnstatus` binary(1) DEFAULT NULL,
+  `issueID` int(255) NOT NULL,
+  `equipmentID` int(255) NOT NULL,
+  `issuerID` int(255) NOT NULL,
+  `date_of_issue` date NOT NULL,
+  `issue_period` int(11) NOT NULL DEFAULT 1,
+  `returnstatus` int(1) NOT NULL DEFAULT 0,
   `date_of_return` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -91,9 +92,9 @@ CREATE TABLE `issues` (
 --
 
 INSERT INTO `issues` (`issueID`, `equipmentID`, `issuerID`, `date_of_issue`, `issue_period`, `returnstatus`, `date_of_return`) VALUES
-(8, '1', 'b19232', '2021-07-18', 2, 0x31, '2021-07-21'),
-(9, '1', 'b19232', '2021-07-18', 2, 0x31, '2021-07-21'),
-(10, '2', 'b19232', '2021-07-18', 4, 0x30, NULL);
+(1, 1, 2, '2021-07-18', 2, 1, '2021-07-21'),
+(2, 7, 4, '2021-07-27', 1, 0, NULL),
+(3, 7, 4, '2021-07-27', 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -102,13 +103,13 @@ INSERT INTO `issues` (`issueID`, `equipmentID`, `issuerID`, `date_of_issue`, `is
 --
 
 CREATE TABLE `request` (
-  `requestID` int(11) NOT NULL,
-  `equipmentID` varchar(10) DEFAULT NULL,
-  `userID` varchar(10) DEFAULT NULL,
-  `request_time` datetime DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
+  `requestID` int(255) NOT NULL,
+  `equipmentID` int(255) NOT NULL,
+  `userID` int(255) NOT NULL,
+  `request_time` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 0,
   `date_of_borrow` date DEFAULT NULL,
-  `IssuePeriod` int(2) NOT NULL
+  `IssuePeriod` int(2) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -116,9 +117,8 @@ CREATE TABLE `request` (
 --
 
 INSERT INTO `request` (`requestID`, `equipmentID`, `userID`, `request_time`, `status`, `date_of_borrow`, `IssuePeriod`) VALUES
-(1, '1', 'b19232', '2021-07-18 05:00:00', 1, '2021-07-18', 2),
-(2, '2', 'b19232', '2021-07-18 05:00:00', 0, '2021-07-18', 4),
-(3, '3', 'b19046', '2021-07-14 22:59:34', 2, '2021-07-21', 1);
+(1, 7, 4, '2021-07-24 20:20:04', 1, '2021-07-27', 1),
+(2, 3, 4, '2021-07-24 20:39:54', 0, '2021-09-24', 3);
 
 --
 -- Triggers `request`
@@ -139,12 +139,12 @@ DELIMITER ;
 --
 
 CREATE TABLE `user` (
-  `ID` int(10) NOT NULL,
+  `ID` int(255) NOT NULL,
   `rno` varchar(10) NOT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `fname` varchar(50) DEFAULT NULL,
-  `mobile_no` varchar(15) DEFAULT NULL,
-  `emailid` varchar(225) DEFAULT NULL,
+  `password` varchar(50) NOT NULL,
+  `fname` varchar(50) NOT NULL,
+  `mobile_no` varchar(15) NOT NULL,
+  `emailid` varchar(225) NOT NULL,
   `corestatus` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -153,8 +153,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`ID`, `rno`, `password`, `fname`, `mobile_no`, `emailid`, `corestatus`) VALUES
-(1, 'b19046', 'abc123', 'Muskan', '7042370732', 'b19046@students.iitmandi.ac.in', 0),
-(2, 'b19232', 'muskanisthebest', 'Aditee', '884468504', 'b19232@students.iitmandi.ac.in', 1);
+(1, 'b19046', 'abc123', 'Muskan', '7042370732', 'b19046@students.iitmandi.ac.in', 1),
+(2, 'b19232', 'muskanisthebest', 'Aditee', '884468504', 'b19232@students.iitmandi.ac.in', 1),
+(3, 'b1', 'b123', 'bee', '9876', 'a@b', 0);
 
 --
 -- Indexes for dumped tables
@@ -195,28 +196,34 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `club_equipment`
 --
 ALTER TABLE `club_equipment`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `issues`
 --
 ALTER TABLE `issues`
-  MODIFY `issueID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `issueID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `requestID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
