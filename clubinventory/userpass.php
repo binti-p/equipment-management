@@ -6,8 +6,8 @@ if (strlen($_SESSION['ulogin']) == 0) {
   header('location:index.php');
 } else {
   if (isset($_POST['change'])) {
-    $password = ($_POST['password']);
-    $newpassword = ($_POST['newpassword']);
+    $password = md5($_POST['password']);
+    $newpassword = md5($_POST['newpassword']);
     $username = $_SESSION['ulogin'];
     $sql = "SELECT password FROM user where rno=:username and password=:password";
     $query = $db->prepare($sql);

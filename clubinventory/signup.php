@@ -8,7 +8,7 @@ if (isset($_POST['signup'])) {
         $fname = $_POST['fullname'];
         $mobileno = $_POST['mobileno'];
         $email = $_POST['email'];
-        $password = ($_POST['password']);
+        $password = md5($_POST['password']);
         $sql = "INSERT INTO user(rno,fname,mobile_no,emailid,password) VALUES(:StudentId,:fname,:mobileno,:email,:password)";
         $query = $db->prepare($sql);
         $query->bindParam(':StudentId', $StudentId, PDO::PARAM_STR);

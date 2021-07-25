@@ -102,7 +102,8 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                     $query1->bindParam(':id', $id, PDO::PARAM_STR);
                                                     $query1->execute();
                                                     $row = $query1->fetch(PDO::FETCH_ASSOC); 
-                                                    $name = $row['rno'];  ?>
+                                                    $name = $row['rno']; 
+                                                     ?>
                                                     <tr class="odd gradeX">
                                                         <td class="center"><?php echo htmlentities($cnt); ?></td>
                                                         <td class="center"><?php echo htmlentities($name); ?></td>

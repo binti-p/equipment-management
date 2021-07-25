@@ -8,7 +8,7 @@ if ($_SESSION['alogin'] != '') {
 if (isset($_POST['login'])) {
     try {
         $username = $_POST['username'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $sql = "SELECT `reference_name`,`password` FROM `admin` WHERE `reference_name`=:username and `password`=:password";
         $query = $db->prepare($sql);
         $query->bindParam(':username', $username, PDO::PARAM_STR);

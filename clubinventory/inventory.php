@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('base/config.php');
+error_reporting(0);
 // Validating Session
 if(strlen($_SESSION['ulogin'])==0)
 {
